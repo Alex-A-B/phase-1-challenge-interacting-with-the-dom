@@ -114,20 +114,18 @@ pauseButton.addEventListener("click", (e) =>{
     pauseResume();
 });
 
-
 // 3 - likes button will return UL list similar to todo, possibly easier than pause! (Narrator: it was not)
 
 // DOM Variables
 // heartButton variable in DOM declared above
 const likesList = document.querySelector("ul.likes");
 
-
 // create array to store likes
 const likeArray = [];
 
 // value for the counter
 const counterElement = document.querySelector("h1#counter"); 
-const counterValue = parseInt(counterElement.innerText);
+let counterValue = parseInt(counterElement.innerText);
 
 
 // value for the likes
@@ -183,11 +181,27 @@ heartButton.addEventListener("click", (e) =>{
 
 // 4 - Counter function as everything else is dependent on it(!) 
 
-document.addEventListener("DOMContentLoaded", () => {
+const displayCounter = () => {
+    return counterElement.innerHTML = counterValue
+};
 
+document.addEventListener("DOMContentLoaded", () => {
+    // need to add counter function in here
 });
 
 // 5 - increment decrement
+    // no need to worry about going negative the example can as well!
+
+minusButton.addEventListener("click", () =>{
+    counterValue--;
+    displayCounter();
+});
+
+plusButton.addEventListener("click", () => {
+    counterValue++;
+    displayCounter();
+});
+
 
 // 6 - pause and resume counter - add to the pauseResume function or pauseButton eventListener above
 
