@@ -1,0 +1,55 @@
+// User Stories
+
+// I should see the timer increment every second once the page is loaded.
+            // building a counter function with setInterval being 1000ms
+            // probably a for loop?
+            // this should be hooked to the innerHTML of elementId "counter"
+
+// I can manually increment and decrement the counter using plus and minus buttons.
+            // onClick eventListener to add or subtract from the the for loop 
+
+// I can 'like' an individual number of the counter.
+// I should see the number of 'likes' associated with the number displayed at click.
+            // propose an onClick eventListener 
+            // output innerHTML to unordered list (UL) - times clicked at counter time.
+            // UL class= "likes" - assume will work in similar fashion to todo list challenge.
+
+
+// I can pause the counter with a pause button. This:
+        // pauses the counter
+        // disables all buttons except pause
+        // switches the button label from pause to resume 
+            // onClick eventListener required
+            // Will setTimeout and pause the counter function
+            // Will disable buttons - CSS grey out to review
+            // Change text and possibly elementId label to resume
+
+
+// I should be able to click the restart button to restart the counter and re-enable the buttons 
+// *** assuming restart here is referring to resume button ***
+            // onClick eventListener will revert to original state            
+            // to resume will use clearTimeout() function
+            
+// I can leave comments on the 'gameplay' such as: "Wow, what a fun game this is."
+            // this will be similar to the todo list eventListener where it triggers from submit and lists output.
+            // innerHTML to be hooked at elementId = "list"
+            // CSS style required to remove list ornamentation (the bullet points!) 
+
+
+// Workflow Priority order (or which order I think I can get done more easily)
+
+// 1 - Comments section
+
+// 2 - Pause to Resume to disable remaining buttons
+        // set other buttons to "buttonID".disabled = true; and vice versa
+
+// 3 - likes button will return UL list similar to todo, possibly easier than pause!
+
+// 4 - Counter function as everything else is dependent on it(!) 
+
+// 5 - increment decrement
+
+// 6 - pause and resume counter
+
+
+
