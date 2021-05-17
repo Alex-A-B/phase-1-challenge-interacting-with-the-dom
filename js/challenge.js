@@ -121,8 +121,7 @@ const likeCounter = (counterVal) => {
 const likeObject = (counterVal, likeVal) => {
     let repeatCounterValue = likeArray.find( array => array.counterNumber === counterVal)
     if (!!repeatCounterValue) {
-        // likes = parseInt(repeatCounterValue.likeNumber[0]) + 1;
-        repeatCounterValue.likeNumber.splice(-1, 1, likeVal);
+       repeatCounterValue.likeNumber.splice(-1, 1, likeVal);
     } else{ 
         likeArray.push({counterNumber: counterVal, likeNumber: [likeVal]})
     } 
@@ -134,9 +133,9 @@ const likeObject = (counterVal, likeVal) => {
 const formatLikes = (input) => {
     return input.map( array => {
         if(array.likeNumber == 1) {
-        return `<li data-num="${array.counterNumber}"> ${array.counterNumber} has been liked <span>${array.likeNumber}</span> time.</li>`
+        return `<li> ${array.counterNumber} has been liked ${array.likeNumber} time.</li>`
         } else {
-          return `<li data-num="${array.counterNumber}"> ${array.counterNumber} has been liked <span>${array.likeNumber}</span> times.</li>`
+          return `<li> ${array.counterNumber} has been liked ${array.likeNumber} times.</li>`
         }
     });
 };
