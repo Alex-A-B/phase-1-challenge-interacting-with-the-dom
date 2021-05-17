@@ -40,6 +40,41 @@
 
 // 1 - Comments section
 
+// Variables to locate Id's in DOM
+const commentForm = document.getElementById("comment-form");
+const commentText = document.getElementById("comment-input");
+const commentSection = document.getElementById("list");
+
+// Variable to create comments array
+const comments = [];
+
+// function to put comment text into array list
+const commentObject = (text) => {
+    comments.push(text);
+    return comments;
+};
+
+// function to set HTML formatting for comments list
+const formatComments = (input) => {
+    return input.map( comment => {
+        return `<p>${comment}</p>`
+    });
+};
+
+// function to display comments on webpage
+const displayComments = () => {
+    return commentSection.innerHTML = formatComments(comments).join("");
+};
+
+// eventListener for submitting comments to page.
+commentForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    commentObject(commentText.value);
+    e.target.reset();
+    displayComments()
+});
+
+
 // 2 - Pause to Resume to disable remaining buttons
         // set other buttons to "buttonID".disabled = true; and vice versa
 
