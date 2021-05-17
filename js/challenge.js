@@ -112,18 +112,84 @@ const pauseResume = () => {
 pauseButton.addEventListener("click", (e) =>{
     // stop counter - setTimeOut function. (this is the pause!)
     pauseResume();
-
-
 });
 
 
-// 3 - likes button will return UL list similar to todo, possibly easier than pause!
+// 3 - likes button will return UL list similar to todo, possibly easier than pause! (Narrator: it was not)
+
+// DOM Variables
+// heartButton variable in DOM declared above
+const likesList = document.querySelector("ul.likes");
+
+
+// create array to store likes
+const likeArray = [];
+
+// value for the counter
+const counterElement = document.querySelector("h1#counter"); 
+const counterValue = parseInt(counterElement.innerText);
+
+
+// value for the likes
+let likes = 0
+// will need on counter change reset likes 
+// increments the like counter on click - probably should be added to another function (e.g. likeObject)
+const likeCounter = () => {
+    likes++
+};
+
+// push to likeArray Current Counter Value, current number of clicks of Like
+const likeObject = (counterVal, likeVal) => {
+    let repeatCounterValue = likeArray.find( array => array.counterNumber === counterVal)
+    if (!!repeatCounterValue) {
+        repeatCounterValue.likeNumber.splice(-1, 1, likeVal);
+    } else{ 
+        likeArray.push({counterNumber: counterVal, likeNumber: [likeVal]})
+    } 
+    return likeArray
+};
+
+
+
+// format the like output to desired text - if/else to plural the output. 
+// string similar to the example (reverse engineering it) but can be shortened data-num & span tags.
+const formatLikes = (input) => {
+    return input.map( array => {
+        if(array.likeNumber == 1) {
+        return `<li data-num="${array.counterNumber}"> ${array.counterNumber} has been liked <span>${array.likeNumber}</span> time.</li>`
+        } else {
+          return `<li data-num="${array.counterNumber}"> ${array.counterNumber} has been liked <span>${array.likeNumber}</span> times.</li>`
+        }
+    });
+};
+  
+// function to display likes text.
+
+const displayLikes = () => {
+    return likesList.innerHTML = formatLikes(likeArray).join("");
+}
+
+
+heartButton.addEventListener("click", (e) =>{
+    // What I believe is happening innerHTML <li> tag to say:
+    // `<li data-num="${counterValue}"> ${counterValue} has been liked <span>${numberOfLikes}</span> time(s).</li>`
+    // there is some form of an if/else for numberOfLikes >1 to assign " time" or " times"
+    // there is no bullet formatting, there is no sorting by liked value (feature?)
+    likeCounter(); // increases likes 'score' every click.
+    likeObject(counterValue, likes); // calls function to push the counters value and the likes value to the likeArray.
+    displayLikes(); // calls the string format of the array, joins it together and returns it to the innerHTML
+
+});
 
 // 4 - Counter function as everything else is dependent on it(!) 
 
+document.addEventListener("DOMContentLoaded", () => {
+
+});
+
 // 5 - increment decrement
 
-// 6 - pause and resume counter
+// 6 - pause and resume counter - add to the pauseResume function or pauseButton eventListener above
 
 
 
