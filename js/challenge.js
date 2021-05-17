@@ -87,32 +87,7 @@ const heartButton = document.getElementById("heart");
 const submitButton = document.getElementById("submit");
 // commentText input variable declared globally above
 
-
-// pauseResume function - IF text value = pause, disable everything and change to resume ELSE enable and set pause.
-const pauseResume = () => {
-    if (pauseButton.innerText === "pause"){
-            pauseButton.innerText = "resume";
-            minusButton.disabled = true;
-            plusButton.disabled = true;
-            heartButton.disabled = true;
-            submitButton.disabled = true;
-            commentText.disabled = true;
-    }else{
-        pauseButton.innerText = "pause";
-        minusButton.disabled = false;
-        plusButton.disabled = false;
-        heartButton.disabled = false;
-        submitButton.disabled = false;
-        commentText.disabled = false;
-    }
-};
-
-
-// event listener for pause button
-pauseButton.addEventListener("click", (e) =>{
-    // stop counter - setTimeOut function. (this is the pause!)
-    pauseResume();
-});
+// moved pause button to bottom as users the variables declared for the set interval need to be above it in the script.
 
 // 3 - likes button will return UL list similar to todo, possibly easier than pause! (Narrator: it was not)
 
@@ -167,36 +142,44 @@ const displayLikes = () => {
     return likesList.innerHTML = formatLikes(likeArray).join("");
 }
 
-
-heartButton.addEventListener("click", (e) =>{
-    // What I believe is happening innerHTML <li> tag to say:
+ // What I believe is happening innerHTML <li> tag to say:
     // `<li data-num="${counterValue}"> ${counterValue} has been liked <span>${numberOfLikes}</span> time(s).</li>`
     // there is some form of an if/else for numberOfLikes >1 to assign " time" or " times"
     // there is no bullet formatting, there is no sorting by liked value (feature?)
+heartButton.addEventListener("click", (e) =>{
     likeCounter(); // increases likes 'score' every click.
     likeObject(counterValue, likes); // calls function to push the counters value and the likes value to the likeArray.
     displayLikes(); // calls the string format of the array, joins it together and returns it to the innerHTML
-
 });
 
 // 4 - Counter function as everything else is dependent on it(!) 
 
+// adds 1 to counter when called
+const addToCounter = () => {
+    counterValue++;
+    displayCounter();
+};
+// displays the counter value to the webpage inner html.
 const displayCounter = () => {
     return counterElement.innerHTML = counterValue
 };
+// sets the interval to call the addToCounter function. 
+let counterInterval = setInterval(addToCounter, 1000);
 
+// eventListener which on load calls the counter interval to start it off.
 document.addEventListener("DOMContentLoaded", () => {
-    // need to add counter function in here
+    counterInterval;
 });
 
 // 5 - increment decrement
     // no need to worry about going negative the example can as well!
 
+//minus one to counter value, display the value on click.
 minusButton.addEventListener("click", () =>{
     counterValue--;
     displayCounter();
 });
-
+// plus one to counter value, display the value on click.
 plusButton.addEventListener("click", () => {
     counterValue++;
     displayCounter();
@@ -205,5 +188,32 @@ plusButton.addEventListener("click", () => {
 
 // 6 - pause and resume counter - add to the pauseResume function or pauseButton eventListener above
 
+// pauseResume function - IF text value = pause, disable everything and change to resume ELSE enable and set pause.
+const pauseResume = () => {
+    if (pauseButton.innerText === "pause"){
+            clearInterval(counterInterval);
+            pauseButton.innerText = "resume";
+            minusButton.disabled = true;
+            plusButton.disabled = true;
+            heartButton.disabled = true;
+            submitButton.disabled = true;
+            commentText.disabled = true;
+    }else{
+        counterInterval = setInterval(addToCounter, 1000);
+        pauseButton.innerText = "pause";
+        minusButton.disabled = false;
+        plusButton.disabled = false;
+        heartButton.disabled = false;
+        submitButton.disabled = false;
+        commentText.disabled = false;
+    }
+};
+
+
+// event listener for pause button
+pauseButton.addEventListener("click", (e) =>{
+    // stop counter - setTimeOut function. (this is the pause!)
+    pauseResume();
+});
 
 
