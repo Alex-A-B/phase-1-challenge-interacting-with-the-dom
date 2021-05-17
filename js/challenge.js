@@ -107,22 +107,27 @@ let counterValue = parseInt(counterElement.innerText);
 let likes = 0
 // will need on counter change reset likes 
 // increments the like counter on click - probably should be added to another function (e.g. likeObject)
-const likeCounter = () => {
+const likeCounter = (counterVal) => {
+    let repeatCounterValue = likeArray.find( array => array.counterNumber === counterVal)
+    if (!!repeatCounterValue) {
+        likes = parseInt(repeatCounterValue.likeNumber[0]) + 1;
+    } else {
     likes++
+    } 
+    return likes
 };
 
 // push to likeArray Current Counter Value, current number of clicks of Like
 const likeObject = (counterVal, likeVal) => {
     let repeatCounterValue = likeArray.find( array => array.counterNumber === counterVal)
     if (!!repeatCounterValue) {
+        // likes = parseInt(repeatCounterValue.likeNumber[0]) + 1;
         repeatCounterValue.likeNumber.splice(-1, 1, likeVal);
     } else{ 
         likeArray.push({counterNumber: counterVal, likeNumber: [likeVal]})
     } 
     return likeArray
 };
-
-
 
 // format the like output to desired text - if/else to plural the output. 
 // string similar to the example (reverse engineering it) but can be shortened data-num & span tags.
@@ -147,9 +152,10 @@ const displayLikes = () => {
     // there is some form of an if/else for numberOfLikes >1 to assign " time" or " times"
     // there is no bullet formatting, there is no sorting by liked value (feature?)
 heartButton.addEventListener("click", (e) =>{
-    likeCounter(); // increases likes 'score' every click.
+    likeCounter(counterValue); // increases likes 'score' every click.
     likeObject(counterValue, likes); // calls function to push the counters value and the likes value to the likeArray.
     displayLikes(); // calls the string format of the array, joins it together and returns it to the innerHTML
+    likes = 0; // resets
 });
 
 // 4 - Counter function as everything else is dependent on it(!) 
