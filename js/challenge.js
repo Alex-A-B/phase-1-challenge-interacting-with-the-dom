@@ -33,7 +33,7 @@
 // I can leave comments on the 'gameplay' such as: "Wow, what a fun game this is."
             // this will be similar to the todo list eventListener where it triggers from submit and lists output.
             // innerHTML to be hooked at elementId = "list"
-            // CSS style required to remove list ornamentation (the bullet points!) 
+            // CSS style required to remove list ornamentation (the bullet points!) yolo'd and just used paragraphs rather than list!
 
 
 // Workflow Priority order (or which order I think I can get done more easily)
@@ -77,6 +77,45 @@ commentForm.addEventListener("submit", (e) => {
 
 // 2 - Pause to Resume to disable remaining buttons
         // set other buttons to "buttonID".disabled = true; and vice versa
+
+// variables to locate button Id's in DOM
+const pauseButton = document.getElementById("pause");
+// these Id's to be 'disabled' 
+const minusButton = document.getElementById("minus");
+const plusButton = document.getElementById("plus");
+const heartButton = document.getElementById("heart");
+const submitButton = document.getElementById("submit");
+// commentText input variable declared globally above
+
+
+// pauseResume function - IF text value = pause, disable everything and change to resume ELSE enable and set pause.
+const pauseResume = () => {
+    if (pauseButton.innerText === "pause"){
+            pauseButton.innerText = "resume";
+            minusButton.disabled = true;
+            plusButton.disabled = true;
+            heartButton.disabled = true;
+            submitButton.disabled = true;
+            commentText.disabled = true;
+    }else{
+        pauseButton.innerText = "pause";
+        minusButton.disabled = false;
+        plusButton.disabled = false;
+        heartButton.disabled = false;
+        submitButton.disabled = false;
+        commentText.disabled = false;
+    }
+};
+
+
+// event listener for pause button
+pauseButton.addEventListener("click", (e) =>{
+    // stop counter - setTimeOut function. (this is the pause!)
+    pauseResume();
+
+
+});
+
 
 // 3 - likes button will return UL list similar to todo, possibly easier than pause!
 
