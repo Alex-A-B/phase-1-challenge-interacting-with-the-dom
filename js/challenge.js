@@ -2,7 +2,7 @@
 
 // I should see the timer increment every second once the page is loaded.
             // building a counter function with setInterval being 1000ms
-            // probably a for loop?
+            // probably a for loop? - no just setInterval does that! (and clearInterval to pause it!)
             // this should be hooked to the innerHTML of elementId "counter"
 
 // I can manually increment and decrement the counter using plus and minus buttons.
@@ -87,7 +87,7 @@ const heartButton = document.getElementById("heart");
 const submitButton = document.getElementById("submit");
 // commentText input variable declared globally above
 
-// moved pause button to bottom as users the variables declared for the set interval need to be above it in the script.
+// moved pause button function to bottom of code as uses the variables declared for the set interval need to be above it in the script.
 
 // 3 - likes button will return UL list similar to todo, possibly easier than pause! (Narrator: it was not)
 
@@ -99,7 +99,8 @@ const likesList = document.querySelector("ul.likes");
 const likeArray = [];
 
 // value for the counter
-const counterElement = document.querySelector("h1#counter"); 
+// const counterElement = document.querySelector("h1#counter"); 
+const counterElement = document.getElementById("counter");
 let counterValue = parseInt(counterElement.innerText);
 
 
@@ -147,7 +148,7 @@ const displayLikes = () => {
 }
 
  // What I believe is happening innerHTML <li> tag to say:
-    // `<li data-num="${counterValue}"> ${counterValue} has been liked <span>${numberOfLikes}</span> time(s).</li>`
+    // `<li> ${counterValue} has been liked ${numberOfLikes} time(s).</li>`
     // there is some form of an if/else for numberOfLikes >1 to assign " time" or " times"
     // there is no bullet formatting, there is no sorting by liked value (feature?)
 heartButton.addEventListener("click", (e) =>{
@@ -190,7 +191,6 @@ plusButton.addEventListener("click", () => {
     displayCounter();
 });
 
-
 // 6 - pause and resume counter - add to the pauseResume function or pauseButton eventListener above
 
 // pauseResume function - IF text value = pause, disable everything and change to resume ELSE enable and set pause.
@@ -214,10 +214,8 @@ const pauseResume = () => {
     }
 };
 
-
 // event listener for pause button
 pauseButton.addEventListener("click", (e) =>{
-    // stop counter - setTimeOut function. (this is the pause!)
     pauseResume();
 });
 
